@@ -10,14 +10,14 @@ This repository contains two images:
     * [neural-style](https://github.com/anishathalye/neural-style)
     * [fast-style-transfer](https://github.com/lengstrom/fast-style-transfer)
     * *pre-trained VGG 19* network required by both repos
+    * [example models](https://drive.google.com/drive/folders/0B9jhaT37ydSyRk9UX0wwX3BpMzQ) for **fast-style-transfer**
 
 2. `chainer-style-transfer` containing:
     * [chainer-fast-neuralstyle](https://github.com/yusuketomoto/chainer-fast-neuralstyle/tree/resize-conv)
     * *pre-trained VGG 16* network required for training
 
 * the following files are **not** included:
-    * [models](https://drive.google.com/drive/folders/0B9jhaT37ydSyRk9UX0wwX3BpMzQ?usp=sharing) for applying styles for **fast-style-transfer**
-    * [coco2014](http://msvocds.blob.core.windows.net/coco2014/train2014.zip) for training new styles for **fast-style-transfer** and **chainer-fast-neuralstyle**
+    * [coco2014 dataset](http://msvocds.blob.core.windows.net/coco2014/train2014.zip) needed for training new models for **fast-style-transfer** and **chainer-fast-neuralstyle**
 
 <br>
 
@@ -71,11 +71,19 @@ This repository contains two images:
 
 * Command for [fast-style-transfer](https://github.com/lengstrom/fast-style-transfer):
 
-    * Run style transfer on included example image with model `la_muse.ckpt` downloaded in host working directory
+    * Run style transfer on included example image with model `la_muse.ckpt`
         ```
-        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia jtomori/neural-fast-style-transfer python ../fast-style-transfer/evaluate.py --checkpoint la_muse.ckpt --in-path ../fast-style-transfer/examples/content/chicago.jpg --out-path test.jpg
+        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia jtomori/neural-fast-style-transfer python ../fast-style-transfer/evaluate.py --checkpoint ../fast-style-transfer/examples/models/la_muse.ckpt --in-path ../fast-style-transfer/examples/content/chicago.jpg --out-path test.jpg
         ```
-        This will transfer style of `la_muse.ckpt` on example image provided with the repository resulting in `test.jpg`. You can replace `../fast-style-transfer/examples/content/chicago.jpg` with `content.jpg` to apply style on `content.jpg` in your current host directory.
+        This will transfer style of example model `la_muse.ckpt` on example image provided with the repository resulting in `test.jpg`. You can replace `../fast-style-transfer/examples/content/chicago.jpg` with `content.jpg` to apply style on `content.jpg` in your current host directory.
+
+        Included example models:
+        * `la_muse.ckpt`
+        * `rain_princess.ckpt`
+        * `scream.ckpt`
+        * `udnie.ckpt`
+        * `wave.ckpt`
+        * `wreck.ckpt`
 
 * Command for [chainer-fast-neuralstyle](https://github.com/yusuketomoto/chainer-fast-neuralstyle/tree/resize-conv):
 
@@ -83,6 +91,11 @@ This repository contains two images:
         ```bash
         $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia --memory 7000m jtomori/chainer-style-transfer python3 ../chainer-fast-neuralstyle/generate.py ../chainer-fast-neuralstyle/sample_images/tubingen.jpg -m ../chainer-fast-neuralstyle/models/composition.model -o test.jpg -g 0
         ```
+        
+        Included example models:
+        * `composition.model`
+        * `seurat.model`
+        
         Note the `--memory 7000m` argument, which limits containers memory usage. Set it accordingly to your free memory to avoid system crashes :)
 
 <br>

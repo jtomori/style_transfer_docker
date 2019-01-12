@@ -17,7 +17,7 @@ RUN curl http://www.vlfeat.org/matconvnet/models/imagenet-vgg-verydeep-19.mat --
 
 # Clone repos, install requirements
 RUN git clone https://github.com/anishathalye/neural-style.git && \
-    git clone https://github.com/lengstrom/fast-style-transfer.git && \
+    git clone https://github.com/jtomori/fast-style-transfer.git && \
     pip install moviepy
 
 # Let fast-style-transfer work outside of its repo directory
