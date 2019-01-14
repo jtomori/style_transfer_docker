@@ -13,6 +13,6 @@ RUN apt-get update && \
 WORKDIR /app
 
 # Clone repo, install requirements
-RUN git clone --single-branch --branch resize-conv https://github.com/jtomori/chainer-fast-neuralstyle.git && \
+RUN git clone --single-branch --branch resize-conv https://github.com/jtomori/chainer-fast-neuralstyle.git
 
 WORKDIR /app/work
