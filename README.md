@@ -84,6 +84,12 @@ This repository contains two images:
         * `udnie.ckpt`
         * `wave.ckpt`
         * `wreck.ckpt`
+    
+    * Train a new model based on `style.jpg`
+        ```bash
+        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia jtomori/neural-fast-style-transfer python ../fast-style-transfer/style.py --vgg-path ../imagenet-vgg-verydeep-19.mat --style style.jpg --checkpoint-dir checkpoint --train-path dataset
+        ```
+        Note that you need to pass path to [coco2014](http://msvocds.blob.core.windows.net/coco2014/train2014.zip) dataset, which is not included in the Docker image. In this case it is `dataset` folder in host working directory. `checkpoint` directory also needs to be created there.
 
 * Command for [chainer-fast-neuralstyle](https://github.com/yusuketomoto/chainer-fast-neuralstyle/tree/resize-conv):
 
@@ -97,6 +103,12 @@ This repository contains two images:
         * `seurat.model`
         
         Note the `--memory 7000m` argument, which limits containers memory usage. Set it accordingly to your free memory to avoid system crashes :)
+    
+    * Train a new model on `style.jpg`
+        This is not working currently, working on a fix.
+        ```bash
+        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia --memory 7000m jtomori/chainer-style-transfer python3 ../chainer-fast-neuralstyle/train.py --initmodel ../chainer-fast-neuralstyle/vgg16.model --dataset dataset --style_image style.jpg -g 0
+        ```
 
 <br>
 

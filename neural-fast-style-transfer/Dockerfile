@@ -13,7 +13,7 @@ RUN apt-get update && \
 WORKDIR /app
 
 # Download pre-trained VGG network
-RUN curl http://www.vlfeat.org/matconvnet/models/imagenet-vgg-verydeep-19.mat --output imagenet-vgg-verydeep-19.mat
+RUN curl http://www.vlfeat.org/matconvnet/models/beta16/imagenet-vgg-verydeep-19.mat --output imagenet-vgg-verydeep-19.mat
 
 # Clone repos, install requirements
 RUN git clone https://github.com/anishathalye/neural-style.git && \
