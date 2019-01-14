@@ -1,10 +1,10 @@
-FROM chainer/chainer:v2.0.1-python3
+FROM chainer/chainer:v5.1.0-python3
 
 # Install packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     git \
-    python3-imaging && \
+    python3-pil && \
     apt-get autoclean && \
     apt-get clean && \
     apt-get autoremove && \
