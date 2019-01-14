@@ -102,13 +102,13 @@ This repository contains two images:
         * `composition.model`
         * `seurat.model`
         
-        Note the `--memory 7000m` argument, which limits containers memory usage. Set it accordingly to your free memory to avoid system crashes :)
+        Note the `--memory 7000m` optional argument, which limits containers memory usage. Set it accordingly to your free memory if you encounter system crashes.
     
-    * Train a new model on `style.jpg`
-        This is not working currently, working on a fix.
+    * Train a new model
         ```bash
-        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia --memory 7000m jtomori/chainer-style-transfer python3 ../chainer-fast-neuralstyle/train.py --initmodel ../chainer-fast-neuralstyle/vgg16.model --dataset dataset --style_image style.jpg -g 0
+        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia --memory 7000m jtomori/chainer-style-transfer python3 ../chainer-fast-neuralstyle/train.py --dataset dataset/ --style_image style.jpg --output model/style -g 0
         ```
+        This will generate a new model `model/style.model` based on `style.jpg` in a current host working directory. `dataset` folder also needs to be present there.
 
 <br>
 
