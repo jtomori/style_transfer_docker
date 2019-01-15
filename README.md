@@ -87,26 +87,26 @@ This repository contains two images:
     
     * Train a new model based on `style.jpg`
         ```bash
-        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia jtomori/neural-fast-style-transfer python ../fast-style-transfer/style.py --vgg-path ../imagenet-vgg-verydeep-19.mat --style style.jpg --checkpoint-dir checkpoint --train-path dataset
+        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia jtomori/neural-fast-style-transfer python ../fast-style-transfer/style.py --vgg-path ../imagenet-vgg-verydeep-19.mat --style style.jpg --checkpoint-dir model --train-path dataset
         ```
-        Note that you need to pass path to [coco2014](http://msvocds.blob.core.windows.net/coco2014/train2014.zip) dataset, which is not included in the Docker image. In this case it is `dataset` folder in host working directory. `checkpoint` directory also needs to be created there.
+        Note that you need to pass path to [coco2014](http://msvocds.blob.core.windows.net/coco2014/train2014.zip) dataset, which is not included in the Docker image. In this case it is `dataset` folder in host working directory. `model` directory also needs to be created there.
 
 * Command for [chainer-fast-neuralstyle](https://github.com/yusuketomoto/chainer-fast-neuralstyle/tree/resize-conv):
 
     * Run style transfer on included example image and model, which will result in `test.jpg` in your curent host working directory
         ```bash
-        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia --memory 7000m jtomori/chainer-style-transfer python3 ../chainer-fast-neuralstyle/generate.py ../chainer-fast-neuralstyle/sample_images/tubingen.jpg -m ../chainer-fast-neuralstyle/models/composition.model -o test.jpg -g 0
+        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia jtomori/chainer-style-transfer python3 ../chainer-fast-neuralstyle/generate.py ../chainer-fast-neuralstyle/sample_images/tubingen.jpg -m ../chainer-fast-neuralstyle/models/composition.model -o test.jpg -g 0
         ```
         
         Included example models:
         * `composition.model`
         * `seurat.model`
         
-        Note the `--memory 7000m` optional argument, which limits containers memory usage. Set it accordingly to your free memory if you encounter system crashes.
+        ***Note:** You can use `--memory 7000m` optional argument, which limits containers memory usage. Set it accordingly to your free memory if you encounter system crashes.*
     
     * Train a new model
         ```bash
-        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia --memory 7000m jtomori/chainer-style-transfer python3 ../chainer-fast-neuralstyle/train.py --dataset dataset/ --style_image style.jpg --output model/style -g 0
+        $ docker run -v "$(pwd)":/app/work -ti --rm --runtime=nvidia jtomori/chainer-style-transfer python3 ../chainer-fast-neuralstyle/train.py --vggmodel ../chainer-fast-neuralstyle/vgg16.model --dataset dataset/ --style_image style.jpg --output model/style -g 0
         ```
         This will generate a new model `model/style.model` based on `style.jpg` in a current host working directory. `dataset` folder also needs to be present there.
 
